@@ -14,3 +14,13 @@ class Emp(models.Model):
 	sal      =models.IntegerField()
 	cmm = models.IntegerField(blank=True,null=True)
 	deptno = models.ForeignKey('Deptno',on_delete=models.CASCADE)
+
+class Emp1(models.Model):
+	empno = models.IntegerField(primary_key=True,unique=True)
+	ename = models.CharField( max_length=50)
+	job = models.CharField( max_length=50)
+	manager = models.CharField( blank=True,max_length=50,null=True)
+	hiredate = models.DateField(null=True)
+	sal      =models.IntegerField()
+	cmm = models.IntegerField(blank=True,null=True)
+	deptno = models.ForeignKey('Deptno',on_delete=models.CASCADE)

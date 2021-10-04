@@ -23,38 +23,41 @@ def Ajax(request):
 		l=[]
 		if 'values'  in name:
 			for i in eval(name):
-				i['hiredate']=str(i['hiredate'])
+				for j in i:
+				   i[j]=str(i[j])
 				l.append(i)
 				
 			return HttpResponse(json.dumps(l))
-		elif '.annotate' in name:
+		elif '.annotate' or '.select_related' in name:
 			for i in eval(name).values():
-				i['hiredate']=str(i['hiredate'])
+				for j in i:
+				   i[j]=str(i[j])
 				l.append(i)
+			
 			return HttpResponse(json.dumps(l))
 		elif '.aggregate(' in name:
 			l=eval(name)
-			l['hiredate']=str(l['hiredate'])
+			for i in l:
+				l[i]=str(l[i])
 			l=[l]
 			return HttpResponse(json.dumps(l))
 		elif '.count()' in name:
-			d ={'count':eval(name)}
+			d ={'count':str(eval(name))}
 			l=[d]
 			return HttpResponse(json.dumps(l))
 		elif '.update(' in name:
 			a=eval(name)
 			a.save()
 			return HttpResponse('<h1>Updated</h1>')
-			
 		else:
 			for i in eval(name):
 				s=model_to_dict(i)
-				if 'hiredate' in s:
-					s['hiredate']=str(s['hiredate'])
+				for j in s:
+				   s[j]=str(s[j])
 				l.append(s)
+			print(l)
 			return HttpResponse(json.dumps(l))
 	except Exception as ex:
-		print(ex)
 		return HttpResponse(str(ex)+str(name))
 		
 			
