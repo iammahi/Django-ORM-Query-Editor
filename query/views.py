@@ -21,14 +21,25 @@ def Ajax(request):
 	try:
 		name = request.GET['name']
 		l=[]
-		if 'values'  in name:
+		if '.values_list' in name:
+			name = name.replace('values_list','values')
+			print(name)
 			for i in eval(name):
 				for j in i:
 				   i[j]=str(i[j])
 				l.append(i)
 				
 			return HttpResponse(json.dumps(l))
-		elif '.annotate' or '.select_related' in name:
+		if '.values' in name:
+			for i in eval(name):
+				for j in i:
+				   i[j]=str(i[j])
+				l.append(i)
+				
+			return HttpResponse(json.dumps(l))
+		
+
+		elif '.annotate'  in name:
 			for i in eval(name).values():
 				for j in i:
 				   i[j]=str(i[j])
@@ -55,7 +66,7 @@ def Ajax(request):
 				for j in s:
 				   s[j]=str(s[j])
 				l.append(s)
-			print(l)
+			
 			return HttpResponse(json.dumps(l))
 	except Exception as ex:
 		return HttpResponse(str(ex)+str(name))

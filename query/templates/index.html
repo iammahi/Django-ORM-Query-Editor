@@ -23,10 +23,10 @@
         <form action="" class="mt-5">
           <div class="form-group">
             <label for="">ORM quary editor</label>
-            <input type="text" class="form-control" name="book_name"  id="book_name">
+            <input type="text" class="form-control"   id="book_name">
           </div>
           
-          <button type="button" class="btn btn-primary mb-5" onclick="ajax()" name="button">Run</button>
+          <button type="button" class="btn btn-primary mb-5" onclick="Query()" name="button">Run</button>
         </form>
       </div>
       <div class="col-3 mt-3">
@@ -38,7 +38,7 @@
             </tr>
             {% for i in d %}
             <tr>
-              <td><a href="#" onclick="T('{{i.q}}')">{{i.Table}}</a></td>
+              <td><a href="#" onclick="Table('{{i.q}}')">{{i.Table}}</a></td>
               <td>{{i.count}}</td>
             </tr>
               
