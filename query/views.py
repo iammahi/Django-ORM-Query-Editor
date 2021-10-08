@@ -23,7 +23,6 @@ def Ajax(request):
 		l=[]
 		if '.values_list' in name:
 			name = name.replace('values_list','values')
-			print(name)
 			for i in eval(name):
 				for j in i:
 				   i[j]=str(i[j])
