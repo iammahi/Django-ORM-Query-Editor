@@ -15,11 +15,30 @@
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
+ 
 
   <div class="container-fluid fix">
     <div class="row">
-      <div class="col-3"></div>
-      <div class="col-6">
+      <div class="col-2 mt-3">
+         <div class="box">
+          <table class="table border">
+            <tr>
+              <th>Files</th>
+              
+            </tr>
+            {% for i in doc %}
+            <tr>
+          <td><a href="{{i.file.url}}" target="_blank">{{i.name}}</a></td>
+              
+            </tr>
+              
+
+            {% endfor %}
+          </table>
+          
+        </div>
+      </div>
+      <div class="col-7">
         <form action="" class="mt-5">
           <div class="form-group">
             <label for="">ORM quary editor</label>

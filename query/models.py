@@ -24,3 +24,7 @@ class Emp1(models.Model):
 	sal      =models.IntegerField()
 	cmm = models.IntegerField(blank=True,null=True)
 	deptno = models.ForeignKey('Deptno',on_delete=models.CASCADE)
+
+class Documents(models.Model):
+	name = models.CharField(max_length=100)
+	file = models.FileField(upload_to='files')

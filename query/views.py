@@ -12,11 +12,9 @@ from django.forms.models import model_to_dict # is used to convert the single re
 def Home(request):
 	emp = Emp.objects.all().count()
 	dep = Deptno.objects.all().count()
-	
-	
+	doc = Documents.objects.all()
 	d=[{'Table':'Deptno' ,'count':dep,'q':'Deptno.objects.all()'},{'Table':'Emp' ,'count':emp,'q':'Emp.objects.all()'}]
-	return  render(request,'index.html',{'d':d})
-
+	return  render(request,'index.html',{'d':d,'doc':doc})
 def Ajax(request):
 	try:
 		name = request.GET['name']
@@ -60,13 +58,20 @@ def Ajax(request):
 			a.save()
 			return HttpResponse('<h1>Updated</h1>')
 		else:
-			for i in eval(name):
-				s=model_to_dict(i)
+			try:
+				for i in (eval(name)):
+					s=model_to_dict(i)
+					for j in s:
+					   s[j]=str(s[j])
+					l.append(s)
+				return HttpResponse(json.dumps(l))
+			except Exception as ex:
+				s=model_to_dict(eval(name))
 				for j in s:
-				   s[j]=str(s[j])
+					s[j]=str(s[j])
 				l.append(s)
-			
-			return HttpResponse(json.dumps(l))
+				return HttpResponse(json.dumps(l))
+
 	except Exception as ex:
 		return HttpResponse(str(ex)+str(name))
 		
